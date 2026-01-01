@@ -1,36 +1,49 @@
-import os
-import pickle
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
+import pickle
+import os
 
-# ---------------- Paths ----------------
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
 MODEL_PATH = os.path.join(BASE_DIR, "models", "lang_model.pkl")
 VECTORIZER_PATH = os.path.join(BASE_DIR, "models", "vectorizer.pkl")
 
-# ---------------- Load Model ----------------
+# Load model
 with open(MODEL_PATH, "rb") as f:
     model = pickle.load(f)
 
 with open(VECTORIZER_PATH, "rb") as f:
-    cv = pickle.load(f)
+    vectorizer = pickle.load(f)
 
-# ---------------- FastAPI ----------------
 app = FastAPI(title="Language Detection API")
 
-class TextRequest(BaseModel):
+# CORS (IMPORTANT)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+class TextInput(BaseModel):
     text: str
 
 @app.get("/")
 def home():
-    return {"message": "Language Detection API is running 🚀"}
+    return {"status": "API running"}
 
 @app.post("/predict")
-def predict_language(request: TextRequest):
-    vector = cv.transform([request.text]).toarray()
+def predict_language(data: TextInput):
+    vector = vectorizer.transform([data.text])
     prediction = model.predict(vector)
+    proba = model.predict_proba(vector)
+
+    confidence = round(float(proba.max()) * 100, 2)
 
     return {
-        "input_text": request.text,
-        "predicted_language": prediction[0]
+        "text": data.text,
+        "language": prediction[0],
+        "confidence": confidence
     }
