@@ -1,16 +1,10 @@
-# 🌐 Language Detection System
+# Language Detection System
 
 A powerful and efficient **Language Detection Model** that identifies the language of a given text input using Machine Learning / NLP techniques.
 
-This project is designed for real-world applications such as:
-- Chatbots 🤖  
-- Content filtering 📄  
-- Multilingual systems 🌍  
-- Search engines 🔍  
-
 ---
 
-## 🚀 Features
+## Features
 
 - Detects multiple languages from input text  
 - Fast and accurate predictions  
@@ -20,13 +14,13 @@ This project is designed for real-world applications such as:
 
 ---
 
-## 🧠 Tech Stack
+## Tech Stack
 
-- Python 🐍  
+- Python
 - Machine Learning (Scikit-learn / NLP)  
 - Pandas & NumPy  
-- Flask / FastAPI (optional)  
+- Flask / FastAPI
 
 ---
 
-## 📂 Project Structure
+## Project Structure
