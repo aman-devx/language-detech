@@ -4,11 +4,11 @@ A powerful and efficient **Language Detection Model** that identifies the langua
 
 ---
 
-## Features
+##  Features
 
-- Detects multiple languages from input text  
-- Fast and accurate predictions  
-- Lightweight and easy to integrate  
+- Detects 20+ languages with high accuracy  
+- Trained on a **custom multilingual dataset** 
+- Fast and efficient predictions ⚡  
 - Clean and modular code structure  
 - Ready for API or frontend integration  
 
@@ -23,4 +23,22 @@ A powerful and efficient **Language Detection Model** that identifies the langua
 
 ---
 
-## Project Structure
+##  Installation Guide
+
+Clone the Repository
+
+```bash
+
+git clone https://github.com/aman-devx/language-detech.git
+
+cd language-detech
+
+python -m venv venv
+
+venv\Scripts\activate
+
+pip install -r requirements.txt
+
+python app/main.py
+
+```
